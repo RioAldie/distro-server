@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  username String @id @db.VarChar(100)
+  password String @db.VarChar(100)
+  email String? @db.VarChar(100)
+  token String? @db.VarChar(100)
+  orders Order[]
+  @@map("users")
+}
+
+model Cloth{
+  name String @db.VarChar(100)
+  id String @id @db.VarChar(100) @default(uuid())
+  price BigInt @db.BigInt()
+  image String? @db.VarChar(100)
+  createAt DateTime? @db.Timestamp()
+  stock Int @db.Integer()
+  // voucher Voucher[]
+  orders Order[]
+
+  @@map("Clothes")
+}
+model Order{
+  id String @id @db.VarChar(100) @default(uuid())
+  createAt DateTime @db.Date()
+  idClothes String @db.VarChar(100)
+  amount Int @db.Integer()
+  totalPrice Float @db.DoublePrecision()
+  clothes Cloth @relation(fields: [idClothes], references: [id])
+  username String @db.VarChar(100)
+  user User @relation(fields: [username], references: [username])
+
+  @@map("Orders")
+}
+// model Voucher{
+//   id_Voucher Int @id @default(autoincrement())
+//   discount Float @db.Real()
+//   name String @db.VarChar(100)
+//   cloth Cloth @relation(fields: [id], references: [id])
+
+//   @@map("vouchers")
+// }
