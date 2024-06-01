@@ -13,11 +13,11 @@ export const prismaClient = new PrismaClient({
     },
     {
       emit: 'event',
-      level: 'warn',
+      level: 'info',
     },
     {
       emit: 'event',
-      level: 'info',
+      level: 'warn',
     },
   ],
 });
@@ -25,12 +25,15 @@ export const prismaClient = new PrismaClient({
 prismaClient.$on('error', (e) => {
   logger.error(e);
 });
+
 prismaClient.$on('warn', (e) => {
   logger.warn(e);
 });
-prismaClient.$on('query', (e) => {
-  logger.query(e);
-});
+
 prismaClient.$on('info', (e) => {
+  logger.info(e);
+});
+
+prismaClient.$on('query', (e) => {
   logger.info(e);
 });
