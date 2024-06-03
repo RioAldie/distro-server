@@ -8,5 +8,6 @@ const addClothValidation = Joi.object({
   createAt: Joi.string().optional(),
   stock: Joi.number().optional(),
 });
+const getClothValidation = Joi.string().max(100).required();
 
-export { addClothValidation };
+export { addClothValidation, getClothValidation };

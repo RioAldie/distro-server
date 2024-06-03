@@ -9,7 +9,16 @@ const add = async (req, res, next) => {
     next(error);
   }
 };
+const getAll = async (req, res, next) => {
+  try {
+    const result = await clothService.getAll();
 
+    res.status(200).json({ data: result });
+  } catch (error) {
+    next(error);
+  }
+};
 export default {
   add,
+  getAll,
 };

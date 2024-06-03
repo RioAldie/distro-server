@@ -19,6 +19,22 @@ const add = async (request) => {
   });
 };
 
+const getAll = async () => {
+  const clothes = await prismaClient.cloth.findMany({
+    select: {
+      name: true,
+      image: true,
+      price: true,
+      stock: true,
+      id: true,
+    },
+  });
+
+  console.log('clothes', clothes);
+  return clothes;
+};
+
 export default {
   add,
+  getAll,
 };
