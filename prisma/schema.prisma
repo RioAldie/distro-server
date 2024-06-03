@@ -24,10 +24,10 @@ model User {
 
 model Cloth{
   name String @db.VarChar(100)
-  id String @id @db.VarChar(100) @default(uuid())
-  price BigInt @db.BigInt()
+  id String @id @db.VarChar(100) 
+  price Float @db.Real()
   image String? @db.VarChar(100)
-  createAt DateTime? @db.Timestamp()
+  createAt String? @db.VarChar(100)
   stock Int @db.Integer()
   // voucher Voucher[]
   orders Order[]

@@ -3,7 +3,7 @@ import Joi from 'joi';
 const registerUserValidation = Joi.object({
   username: Joi.string().max(100).required(),
   password: Joi.string().max(100).required(),
-  email: Joi.string().max(100),
+  email: Joi.string().max(100).optional(),
 });
 const loginUserValidation = Joi.object({
   username: Joi.string().max(100).required(),
